@@ -1,10 +1,10 @@
 # KPL-Complier Hust
-## Cách chạy
+## Cách chạy trên Ubuntu/WSL
 1. Run application
    ```bash
-   mingw32-make
+   make
    ```
 2. Test kpl file
    ```bash
-   ./scanner <*.kpl>
+   ./scanner test/example.kpl
    ```

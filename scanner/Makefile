@@ -1,32 +1,16 @@
-CFLAGS = -c -Wall
+SHELL = /bin/sh
+
+OBJS =  scanner.o reader.o charcode.o token.o
+CFLAG = -Wall -g
 CC = gcc
-LIBS =  -lm 
+INCLUDE =
+LIBS = -lm
 
-all: scanner
-
-debug: CFLAGS += -g
-debug: scanner
-
-scanner: scanner.o reader.o charcode.o token.o error.o
-	${CC} scanner.o reader.o charcode.o token.o error.o -o scanner
-
-reader.o: reader.c
-	${CC} ${CFLAGS} reader.c
-
-scanner.o: scanner.c
-	${CC} ${CFLAGS} scanner.c
-
-charcode.o: charcode.c
-	${CC} ${CFLAGS} charcode.c
-
-token.o: token.c
-	${CC} ${CFLAGS} token.c
-
-error.o: error.c
-	${CC} ${CFLAGS} error.c
+scanner:${OBJS}
+	${CC} ${CFLAGS} ${INCLUDES} -o $@ ${OBJS} ${LIBS}
 
 clean:
-	rm -f *.o *~
+	-rm -f *.o core *.core
 
-clean-window:
-	del /Q *.o
+.c.o:
+	${CC} ${CFLAGS} ${INCLUDES} -c $<
